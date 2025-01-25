@@ -31,17 +31,28 @@ class Jar:
         self.zombie.draw(screen)
         
 class Gun:
-    #sung
-    def __init__(self, bullet_limit, sound_path):
-        self.bullets = bullet_limit
-        self.shoot_sound = pygame.mixer.Sound(sound_path)
-        
+    def __init__(self, bullet_limit, image_path, shoot_sound_path):
+        self.bullets = bullet_limit  
+        self.bullet_limit = bullet_limit  
+        self.shoot_sound = pygame.mixer.Sound(shoot_sound_path)  
+        self.hit_sound = pygame.mixer.Sound("assets/sound/hit.wav")  
+        self.image = pygame.image.load(image_path)  
+        self.rect = self.image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT - 50))
+        self.reload_sound = pygame.mixer.Sound("assets/sound/reload.wav")
+
     def shoot(self):
         if self.bullets > 0:
-            self.bullets -= 1
             self.shoot_sound.play()
+            self.bullets -= 1
             return True
         return False
-    
+
+    def play_hit_sound(self):
+        self.hit_sound.play()
+
     def reload(self):
-        self.bullets = BULLET_LIMIT
+        self.reload_sound.play()
+        self.bullets = self.bullet_limit
+
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
