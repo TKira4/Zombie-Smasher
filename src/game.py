@@ -5,7 +5,7 @@ from setting import *
 class Zombie:
     #Zombie xuat hien tu binh
     def __init__(self, x, y, image):
-        self.image = pygame.image.load(image)
+        self.image = image
         self.rect = self.image.get_rect(topleft=(x,y))
         self.is_visible = False
     
@@ -22,7 +22,7 @@ class Zombie:
 class Jar:
     #Binh chua dau Zombie
     def __init__(self, x, y, image, zombie):
-        self.image = pygame.image.load(image)
+        self.image = image
         self.rect = self.image.get_rect(topleft=(x,y))
         self.zombie = zombie
         

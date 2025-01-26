@@ -1,6 +1,8 @@
 import pygame
 import sys
 import random
+
+import pygame.transform
 from setting import *
 from game import Zombie, Jar, Gun
 from util import load_image, check_collision
@@ -13,9 +15,13 @@ pygame.display.set_caption("Zombie Smasher")
 clock = pygame.time.Clock()
 
 #load tai nguyen
-zombie_image = "assets/sprites/zombie_head.png"
-jar_image = "assets/sprites/jar.png"
+zombie_image = pygame.image.load("assets/sprites/zombie_head.png")
+jar_image = pygame.image.load("assets/sprites/jar.png")
 gun = Gun(BULLET_LIMIT, "assets/sprites/gun.png", "assets/sound/8bit_gunloop_explosion.wav")
+
+#scale img
+zombie_image = pygame.transform.scale(zombie_image, (ZOMBIE_WIDTH, ZOMBIE_HEIGHT))
+jar_image = pygame.transform.scale(jar_image, (JAR_WIDTH, JAR_HEIGHT))
 
 #luu trang thai dau
 game_state = "menu" #cac states gom menu, playing, game_over, shop
@@ -49,8 +55,8 @@ def create_jars(n):
             x, y = 150 + j * (JAR_SIZE + 10), 100 + i * (JAR_SIZE + 10)
             zombie = Zombie(x, y, zombie_image)
             jar = Jar(x, y, jar_image, zombie)
-            jar.append(jar)
-    return jar
+            jars.append(jar)
+    return jars
 
 #game loop
 running = True
@@ -63,19 +69,21 @@ while running:
             running = False
             
         #chon do kho
-        if event.type == "menu":
+        if game_state == "menu":
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     difficulty = 3
                     jars = create_jars(difficulty)
-                if event.key == pygame.K_2:
+                    game_state = "playing"
+                elif event.key == pygame.K_2:
                     difficulty = 5
                     jars = create_jars(difficulty)
-                if event.key == pygame.K_3:
+                    game_state = "playing"
+                elif event.key == pygame.K_3:
                     difficulty = 7
                     jars = create_jars(difficulty)
-                game_state = "playing"
-        
+                    game_state = "playing"
+
         #logic game
         elif game_state == "playing":
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -91,12 +99,7 @@ while running:
                             break
                     if not hit:
                         combo = 0
-        
-        if game_state == "menu":
-            show_menu()
-        
-        #cap nhat game object
-        elif game_state =="playing":
+                                
             for jar in jars:
                 jar.zombie.show() if random.random() < 0.01 else None
                 jar.draw(screen)
