@@ -39,9 +39,11 @@ class Gun:
         self.image = pygame.image.load(image_path)  
         self.rect = self.image.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT - 50))
         self.reload_sound = pygame.mixer.Sound("assets/sound/reload.wav")
+        self.is_reloading = False
+        self.reload_start_time = 0
 
     def shoot(self):
-        if self.bullets > 0:
+        if self.bullets > 0 and not self.is_reloading:
             self.shoot_sound.play()
             self.bullets -= 1
             return True
@@ -51,8 +53,21 @@ class Gun:
         self.hit_sound.play()
 
     def reload(self):
-        self.reload_sound.play()
-        self.bullets = self.bullet_limit
+        if not self.is_reloading:
+            self.reload_sound.play()
+            self.is_reloading = True
+            self.reload_start_time = pygame.time.get_ticks()
+            
+    def update_reload(self):
+        if self.is_reloading:
+            current_time = pygame.time.get_ticks()
+            if current_time - self.reload_start_time >= 2000:
+                self.bullets = BULLET_LIMIT
+                self.is_reloading = False
+                
+    def update_pos(self, mouse_pos):
+        self.rect.centerx = mouse_pos[0]
+        
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)

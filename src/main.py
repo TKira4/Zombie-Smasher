@@ -28,6 +28,7 @@ game_state = "menu" #cac states gom menu, playing, game_over, shop
 difficulty = 3
 score = 0
 combo = 0
+last_shoot_time = pygame.time.get_ticks()
 
 #display menu
 def show_menu():
@@ -46,6 +47,14 @@ def show_menu():
     screen.blit(hard_text, (WINDOW_WIDTH // 2 - hard_text.get_width() // 2, 300))
     
     pygame.display.flip()
+    
+#display game_over screen
+def show_game_over():
+    screen.fill(WHITE)
+    font = pygame.font.SysFont(None, 72)
+    game_over_text = font.render("Game Over!", True, BLACK)
+    screen.blit(game_over_text, (WINDOW_WIDTH // 2 - game_over_text.get_width() // 2, 200))
+    pygame.display.flip() 
     
 #tao binh va zombie
 def create_jars(n):
@@ -70,6 +79,7 @@ while running:
             
         #chon do kho
         if game_state == "menu":
+            show_menu()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
                     difficulty = 3
@@ -86,6 +96,9 @@ while running:
 
         #logic game
         elif game_state == "playing":
+            gun.update_pos(pygame.mouse.get_pos())
+            gun.update_reload()
+            
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if gun.shoot():
                     hit = False
@@ -96,6 +109,7 @@ while running:
                             gun.play_hit_sound()
                             score += 10 + combo * COMBO_MULTIPLIER
                             combo += 1
+                            last_shoot_time = pygame.time.get_ticks()
                             break
                     if not hit:
                         combo = 0
@@ -113,9 +127,19 @@ while running:
             screen.blit(combo_text, (10, 90))
             
             #kiem tra dan
-            if gun.bullets <= 0:
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 gun.reload()
                 
+            #kiem tra game over
+            current_time = pygame.time.get_ticks()
+            if current_time - last_shoot_time > 5000:
+                game_state = "game_over"
+        
+        elif game_state == "game_over":
+            show_game_over()
+            pygame.time.wait(3000)
+            running = False
+          
         gun.draw(screen)
         
         pygame.display.flip()
