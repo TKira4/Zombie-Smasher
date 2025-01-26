@@ -45,5 +45,5 @@ Zombie-Smasher/
 ├── main.py                  # Điểm bắt đầu của game
 ├── settings.py              # File chứa cài đặt game
 ├── game.py          # Định nghĩa các đối tượng trong game
-└── utils.py                 # Các hàm hỗ trợ tiện ích
+└── util.py                 # Các hàm hỗ trợ tiện ích
 ```
