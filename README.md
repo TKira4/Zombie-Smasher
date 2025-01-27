@@ -40,10 +40,10 @@ Zombie-Smasher/
 │
 ├── assets/                  # Thư mục chứa tài nguyên của game
 │   ├── sprites/              # Chứa hình ảnh
-│   └── sounds/              # Chứa âm thanh
+│   └── sound/              # Chứa âm thanh
 │
 ├── main.py                  # Điểm bắt đầu của game
-├── settings.py              # File chứa cài đặt game
+├── setting.py              # File chứa cài đặt game
 ├── game.py          # Định nghĩa các đối tượng trong game
 └── util.py                 # Các hàm hỗ trợ tiện ích
 ```
