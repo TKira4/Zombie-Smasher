@@ -34,16 +34,28 @@ source venv/bin/activate
 ```basg
 pip install -r requirement.txt     
 ```
-**5. Cấu trúc dự án**
+
+# Hướng dẫn chạy
+```basg
+.\venv\Scripts\activate
+python -B .\src\main.py
+```
+# Cấu trúc dự án
 ```plaintext
 Zombie-Smasher/
 │
-├── assets/                  # Thư mục chứa tài nguyên của game
-│   ├── sprites/              # Chứa hình ảnh
+├── assets/                 # Thư mục chứa tài nguyên của game
+│   ├── sprites/            # Chứa hình ảnh
 │   └── sound/              # Chứa âm thanh
 │
-├── main.py                  # Điểm bắt đầu của game
+│── screen/                 # Chứa các screen của game (menu, shop, game)
+│
+│── logic/                  # Chứa logic chính của game
+│
+│
+│── game_objects            # Chứa object
+│
+├── main.py                 # Điểm bắt đầu của game
 ├── setting.py              # File chứa cài đặt game
-├── game.py          # Định nghĩa các đối tượng trong game
-└── util.py                 # Các hàm hỗ trợ tiện ích
+└── renderer.py             # Dùng riêng để vẽ UI
 ```
