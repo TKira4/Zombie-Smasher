@@ -15,25 +15,30 @@ screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Zombie Smasher")
 
 def main():
-    running = True
-    game_state = "menu"
-    difficulty = 3
+    try:
+        running = True
+        game_state = "menu"
+        difficulty = 3
 
-    while running:
-        if game_state == "menu":
-            difficulty = show_menu(screen)
-            game_state = "playing"
+        while running:
+            if game_state == "menu":
+                difficulty = show_menu(screen)
+                game_state = "playing"
 
-        elif game_state == "playing":
-            score = start_game(screen, difficulty)
-            game_state = "game_over"
+            elif game_state == "playing":
+                score = start_game(screen, difficulty)
+                game_state = "game_over"
 
-        elif game_state == "game_over":
-            show_game_over(screen, score)
-            running = False
+            elif game_state == "game_over":
+                show_game_over(screen, score)
+                running = False
 
-    pygame.quit()
-    sys.exit()
+        pygame.quit()
+        sys.exit()
+    except Exception as e:
+        import time
+        time.sleep(10)
+        pass
 
 if __name__ == "__main__":
     main()
