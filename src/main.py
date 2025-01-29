@@ -1,6 +1,5 @@
 import pygame
 import sys
-import random
 import pygame.transform
 
 from setting import *
@@ -14,6 +13,7 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Zombie Smasher")
 
+# Diem bat dau
 def main():
     running = True
     game_state = "menu"

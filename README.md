@@ -53,7 +53,7 @@ Zombie-Smasher/
 │── logic/                  # Chứa logic chính của game
 │
 │
-│── game_objects            # Chứa object
+│── game_objects/           # Chứa object
 │
 ├── main.py                 # Điểm bắt đầu của game
 ├── setting.py              # File chứa cài đặt game
