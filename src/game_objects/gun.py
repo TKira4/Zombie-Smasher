@@ -12,7 +12,7 @@ class Gun:
         self.reload_sound = pygame.mixer.Sound("assets/sound/reload.wav")
         self.is_reloading = False
         self.reload_start_time = 0
-
+        
     def shoot(self):
         if self.bullets > 0 and not self.is_reloading:
             self.shoot_sound.play()
@@ -42,3 +42,5 @@ class Gun:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+        
+

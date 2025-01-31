@@ -1,5 +1,6 @@
 import pygame
 import random
+from  logic.data import *
 
 from setting import *
 from game_objects.im import *
@@ -14,7 +15,7 @@ def start_game(screen, difficulty):
     new_size = WINDOW_WIDTH // (difficulty+2)
     
     #load tai nguyen
-    gun = Gun(BULLET_LIMIT, "assets/sprites/gun.png", "assets/sound/8bit_gunloop_explosion.wav")
+    gun = Gun(BULLET_LIMIT + get_gun_level() // 5, "assets/sprites/gun.png", "assets/sound/8bit_gunloop_explosion.wav")
     zombie_image = pygame.image.load("assets/sprites/zombie_head.png")
     jar_image = pygame.image.load("assets/sprites/jar.png")
 
@@ -72,6 +73,8 @@ def start_game(screen, difficulty):
         gun.update_reload()
 
         if pygame.time.get_ticks() - last_shoot_time > 5000:
+            add_score(score)  
+            data = load_data()
             return score  
 
         gun.draw(screen)
@@ -80,6 +83,8 @@ def start_game(screen, difficulty):
 
         pygame.display.flip()
         clock.tick(FPS)
+      
+
 
 #tao binh
 def create_jars(n, size):
@@ -99,4 +104,5 @@ def create_jars(n, size):
             jars.append(jar)
 
     return jars
+
 

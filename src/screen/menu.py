@@ -24,7 +24,7 @@ def show_menu(screen):
 
             if pygame.Rect(x, y, render.get_width(), render.get_height()).collidepoint(mouse_pos):
                 if pygame.mouse.get_pressed()[0]:  
-                    pygame.time.delay(200)  
+                    pygame.time.delay(1000)  
                     return action  
 
         pygame.display.flip()
@@ -42,6 +42,7 @@ def show_difficulty_menu(screen):
     ]
     
     selected_difficulty = None  
+    waiting_for_release = True
     
     while selected_difficulty is None:  
         screen.fill(WHITE)
@@ -56,8 +57,8 @@ def show_difficulty_menu(screen):
             screen.blit(render, (x, y))
 
             if pygame.Rect(x, y, render.get_width(), render.get_height()).collidepoint(mouse_pos):
-                if pygame.mouse.get_pressed()[0]:  
-                    pygame.time.delay(2000)  
+                if pygame.mouse.get_pressed()[0] and not waiting_for_release:  
+                    pygame.time.delay(1000)  
                     selected_difficulty = difficulty  
 
         pygame.display.flip()
@@ -65,5 +66,7 @@ def show_difficulty_menu(screen):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                waiting_for_release = False
 
     return selected_difficulty  
