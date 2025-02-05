@@ -9,18 +9,20 @@ from renderer import draw_ui
 #logic chinh cua game
 def start_game(screen, difficulty):
     clock = pygame.time.Clock()
-    global zombie_image, jar_image
+    global zombie_head_image, zombie_jaw_image, jar_image
     
     #tao size phu hop voi do kho
     new_size = WINDOW_WIDTH // (difficulty+2)
     
     #load tai nguyen
     gun = Gun(BULLET_LIMIT + get_gun_level() // 5, "assets/sprites/gun.png", "assets/sound/8bit_gunloop_explosion.wav")
-    zombie_image = pygame.image.load("assets/sprites/zombie_head.png")
+    zombie_head_image = pygame.image.load("assets/sprites/zombie_head.png")
+    zombie_jaw_image = pygame.image.load("assets/sprites/zombie_jaw.png")
     jar_image = pygame.image.load("assets/sprites/jar.png")
 
     #scale img
-    zombie_image = pygame.transform.scale(zombie_image, (new_size, new_size))
+    zombie_head_image = pygame.transform.scale(zombie_head_image, (new_size, new_size))
+    # zombie_jaw_image = pygame.transform.scale(zombie_jaw_image, (new_size, new_size))
     jar_image = pygame.transform.scale(jar_image, (new_size, new_size))
 
     #tao binh voi do kho
@@ -65,6 +67,7 @@ def start_game(screen, difficulty):
 
         #zombie xuat hien tu binh
         for jar in jars:
+            jar.zombie.update()
             if random.random() < 0.01:
                 jar.zombie.show()
             jar.draw(screen)
@@ -99,7 +102,7 @@ def create_jars(n, size):
             x = start_x + j * (size + padding)  
             y = start_y + i * (size + padding)  
 
-            zombie = Zombie(x, y, zombie_image)
+            zombie = Zombie(x, y, zombie_head_image, zombie_jaw_image)
             jar = Jar(x, y, jar_image, zombie)
             jars.append(jar)
 
