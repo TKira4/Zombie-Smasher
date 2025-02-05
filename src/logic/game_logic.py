@@ -21,8 +21,8 @@ def start_game(screen, difficulty):
     jar_image = pygame.image.load("assets/sprites/jar.png")
 
     #scale img
-    zombie_head_image = pygame.transform.scale(zombie_head_image, (new_size, new_size))
-    # zombie_jaw_image = pygame.transform.scale(zombie_jaw_image, (new_size, new_size))
+    zombie_head_image = pygame.transform.scale(zombie_head_image, (new_size * zombie_head_image.get_width() // 100, new_size * zombie_head_image.get_height() // 100))
+    zombie_jaw_image = pygame.transform.scale(zombie_jaw_image, (new_size * zombie_jaw_image.get_width() // 100, new_size * zombie_jaw_image.get_height() // 100))
     jar_image = pygame.transform.scale(jar_image, (new_size, new_size))
 
     #tao binh voi do kho
@@ -102,7 +102,7 @@ def create_jars(n, size):
             x = start_x + j * (size + padding)  
             y = start_y + i * (size + padding)  
 
-            zombie = Zombie(x, y, zombie_head_image, zombie_jaw_image)
+            zombie = Zombie(x, y, size, size, zombie_head_image, zombie_jaw_image)
             jar = Jar(x, y, jar_image, zombie)
             jars.append(jar)
 

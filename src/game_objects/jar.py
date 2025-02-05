@@ -9,5 +9,5 @@ class Jar:
         self.zombie = zombie
         
     def draw(self, screen):
-        screen.blit(self.image, self.rect)
         self.zombie.draw(screen)
+        screen.blit(self.image, self.rect)
