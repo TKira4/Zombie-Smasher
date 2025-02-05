@@ -4,11 +4,16 @@ WINDOW_HEIGHT = 600
 FPS = 60
 
 #Color
-WHITE = (255,255,255)
-BLACK = (0,0,0)
-RED = (255,0,0)
-GREEN = (0,255,0)
-BLUE = (0,0,255)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAY = (200, 200, 200)
+GREEN = (34, 177, 76)
+DARK_GREEN = (0, 100, 0)
+BLUE = (0, 162, 232)
+DARK_BLUE = (0, 0, 128)
+RED = (237, 28, 36)
+DARK_RED = (139, 0, 0)
+YELLOW = (255, 201, 14)
 
 #Shelf's Size
 SHELF_ROWS = 3
