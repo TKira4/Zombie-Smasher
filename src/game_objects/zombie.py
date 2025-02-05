@@ -1,5 +1,6 @@
 import pygame
 from setting import *
+import time
 
 class Zombie:
     def __init__(self, jar_x, jar_y, jar_w, jar_h, head_img, jaw_img):
@@ -26,17 +27,21 @@ class Zombie:
         self.jaw_range = 5
         self.jaw_speed = 0.2
 
+        self.spawn_time = None
+
     def show(self):
         if not self.is_visible:
             self.is_visible = True
             self.is_rising = True
             self.rect.y = self.start_y
+            self.spawn_time = time.time()
 
     def hide(self):
         self.is_visible = False
         self.is_rising = False
         self.jaw_offset = 0
         self.jaw_direction = 1
+        self.spawn_time = None
 
     def update(self):
         if self.is_visible and self.is_rising:
@@ -71,3 +76,8 @@ class Zombie:
         jaw_y += self.jaw_offset  
 
         screen.blit(self.jaw_image, (jaw_x, jaw_y))
+
+    def is_time_out(self):
+        if self.is_visible and self.spawn_time is not None:
+            return time.time() - self.spawn_time > 5
+        return False

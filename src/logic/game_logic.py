@@ -32,7 +32,6 @@ def start_game(screen, difficulty):
     score = 0
     combo = 0
     running = True
-    last_shoot_time = pygame.time.get_ticks()
 
     #vong lap chinh
     while running:
@@ -52,8 +51,6 @@ def start_game(screen, difficulty):
                             gun.play_hit_sound()
                             score += 10 + combo * COMBO_MULTIPLIER
                             combo += 1
-                            #ban trung zombie se update time
-                            last_shoot_time = pygame.time.get_ticks()
                             break
                     if not hit:
                         combo = 0
@@ -70,15 +67,14 @@ def start_game(screen, difficulty):
             jar.zombie.update()
             if random.random() < 0.01:
                 jar.zombie.show()
+            if jar.zombie.is_time_out():
+                add_score(score)
+                data = load_data()
+                return score
             jar.draw(screen)
 
         #kiem tra trang thai reload
         gun.update_reload()
-
-        if pygame.time.get_ticks() - last_shoot_time > 5000:
-            add_score(score)
-            data = load_data()
-            return score  
 
         gun.draw(screen)
 
