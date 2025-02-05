@@ -1,13 +1,9 @@
-def open():
-    import threading
-    from ..service.sso import open_sso
-    threading.Thread(target=open_sso).start()
-
 def ui():
     import sys
     from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QPushButton, QVBoxLayout
     from PyQt5.QtCore import Qt
     from PyQt5.QtGui import QColor, QPalette
+    from ..service.sso import open_sso
     
 
     def on_button_click():
@@ -45,7 +41,7 @@ def ui():
     # Thêm nút, căn giữa và thêm trang trí
     button = QPushButton("Click me", window)
     button.setStyleSheet("background-color: #4CAF50; color: white; font-size: 16px; border-radius: 10px; padding: 10px;")
-    button.clicked.connect(open)  # Kết nối nút với hàm on_button_click
+    button.clicked.connect(open_sso)  # Kết nối nút với hàm on_button_click
     layout.addWidget(button)
 
     # Thiết lập layout cho cửa sổ và căn giữa mọi thứ
