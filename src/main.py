@@ -25,9 +25,12 @@ def main():
                 selected_action = show_menu(screen)
 
                 if selected_action == "start":
-                    difficulty = show_difficulty_menu(screen) 
-                    pygame.time.delay(1000)
-                    game_state = "playing"
+                    difficulty = show_difficulty_menu(screen)
+                    if difficulty == "back":
+                        game_state = "menu"
+                    else:
+                        pygame.time.delay(1000)
+                        game_state = "playing"
                 elif selected_action == "shop":
                     show_shop(screen)  
                 elif selected_action == "exit":
