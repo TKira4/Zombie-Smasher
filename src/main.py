@@ -22,6 +22,7 @@ def main():
 
         while running:
             if game_state == "menu":
+                pygame.mouse.set_visible(True)
                 selected_action = show_menu(screen)
 
                 if selected_action == "start":

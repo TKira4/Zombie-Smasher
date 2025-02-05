@@ -12,16 +12,20 @@ def draw_text(screen, text, x, y, font_size=36, color=BLACK):
     text_surface = font.render(text, True, color)
     screen.blit(text_surface, (x, y))
 
-def draw_button(screen, text, x, y, width, height, color, hover_color):
+def draw_button(screen, text, x, y, width, height, color, hover_color, text_color=WHITE):
     mouse_pos = pygame.mouse.get_pos()
     button_rect = pygame.Rect(x, y, width, height)
 
-    if button_rect.collidepoint(mouse_pos):
-        pygame.draw.rect(screen, hover_color, button_rect, border_radius=10)
-    else:
-        pygame.draw.rect(screen, color, button_rect, border_radius=10)
+    current_color = hover_color if button_rect.collidepoint(mouse_pos) else color
+    pygame.draw.rect(screen, current_color, button_rect, border_radius=10)
 
-    draw_text(screen, text, x + 20, y + 10, 36, WHITE)
+    pygame.draw.rect(screen, BLACK, button_rect, 3, border_radius=10)
+
+    font = pygame.font.Font(None, 36)
+    text_surface = font.render(text, True, text_color)
+    text_rect = text_surface.get_rect(center=button_rect.center)
+    screen.blit(text_surface, text_rect)
+
     return button_rect
 
 def draw_ui(screen, gun, score, combo):

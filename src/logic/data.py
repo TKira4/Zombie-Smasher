@@ -35,11 +35,9 @@ def upgrade_gun():
         data["score"] -= upgrade_cost  
         data["gun_level"] += 1  
         save_data(data)  
-        print(f" Gun upgraded to Level {data['gun_level']}! New Score: {data['score']}")
-        return True
+        return f"Gun upgraded to level {data['gun_level']}!"
     else:
-        print(" Not enough points to upgrade gun!")
-        return False
+        return "Not enough points to upgrade!"
 
 def get_gun_level():
     return load_data().get("gun_level", 1)
