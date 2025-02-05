@@ -4,12 +4,12 @@ from screen.shop import *
 from renderer import *
 
 menu_bg = load_background("assets/sprites/menu.png")
-#menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
+menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 def show_menu(screen):
     while True:
-        #draw_background(screen, menu_bg)
-        screen.fill(WHITE)
+        draw_background(screen, menu_bg)
+        #screen.fill(WHITE)
         draw_text(screen, "Zombie Smasher", WINDOW_WIDTH // 2 - 125, 50, 48, GRAY)
 
         start_button = draw_button(screen, "Start Game", WINDOW_WIDTH // 2 -125, 150, 200, 50, GREEN, DARK_GREEN)
@@ -44,8 +44,9 @@ def show_difficulty_menu(screen):
     waiting_for_release = True
 
     while selected_difficulty is None:
-        screen.fill(WHITE)
-        draw_text(screen, "Select Difficulty", WINDOW_WIDTH // 2 - 125, 100, font_size, BLACK)
+        #screen.fill(WHITE)
+        draw_background(screen, menu_bg)
+        draw_text(screen, "Select Difficulty", WINDOW_WIDTH // 2 - 125, 100, font_size, LIGHT_GRAY)
 
         mouse_pos = pygame.mouse.get_pos()
         buttons = []
@@ -53,7 +54,7 @@ def show_difficulty_menu(screen):
         for i, (text, difficulty) in enumerate(options):
             x = WINDOW_WIDTH // 2 - 125
             y = 200 + i * 80
-            button = draw_button(screen, text, x, y, 250, 60, LIGHT_GRAY, DARK_GRAY)
+            button = draw_button(screen, text, x, y, 250, 60, LIGHT_GRAY, DARK_GRAY, BLACK)
             buttons.append((button, difficulty))
 
         back_button = draw_button(screen, "Back to Menu", WINDOW_WIDTH // 2 - 125, 450, 250, 60, RED, DARK_RED)
