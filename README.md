@@ -39,7 +39,7 @@ pip install -r requirement.txt
 # Hướng dẫn chạy
 ```basg
 .\venv\Scripts\activate
-python -B .\src\main.py
+python -B -m .\src\main.py
 ```
 # Cấu trúc dự án
 ```plaintext
