@@ -1,11 +1,16 @@
 import pygame
-from setting import *
+import math
 import time
+import random
+from setting import *
 
 class Zombie:
-    def __init__(self, jar_x, jar_y, jar_w, jar_h, head_img, jaw_img):
+    def __init__(self, jar_x, jar_y, jar_w, jar_h, head_img, jaw_img, helmet_imgs):
         self.head_image = head_img
         self.jaw_image = jaw_img
+        self.helmet_images = helmet_imgs
+        self.has_helmet = random.choice([True, False])
+        self.helmet_stage = 0 if self.has_helmet else -1
 
         self.rect = self.head_image.get_rect()
         self.width = self.rect.width
@@ -13,7 +18,6 @@ class Zombie:
 
         self.final_x = jar_x + (jar_w // 2) - (self.width // 2)
         self.final_y = jar_y - (self.height * 17 // 20)
-
         self.start_y = jar_y + self.height - 10
 
         self.rect.topleft = (self.final_x, self.start_y)
@@ -21,13 +25,16 @@ class Zombie:
         self.is_rising = False   
 
         self.rising_speed = 3
+        self.spawn_time = None  
 
         self.jaw_offset = 0
         self.jaw_direction = 1
         self.jaw_range = 5
         self.jaw_speed = 0.2
 
-        self.spawn_time = None
+        self.float_offset = 0  
+        self.float_speed = 0.02  
+        self.health = 4 if self.has_helmet else 1
 
     def show(self):
         if not self.is_visible:
@@ -41,7 +48,17 @@ class Zombie:
         self.is_rising = False
         self.jaw_offset = 0
         self.jaw_direction = 1
-        self.spawn_time = None
+        self.spawn_time = None  
+
+    def hit(self):
+        if self.health > 1:
+            self.health -= 1
+            if self.has_helmet:
+                self.helmet_stage += 1
+                if self.helmet_stage >= len(self.helmet_images):
+                    self.has_helmet = False
+        else:
+            self.hide()
 
     def update(self):
         if self.is_visible and self.is_rising:
@@ -50,7 +67,10 @@ class Zombie:
                 self.rect.y = self.final_y
                 self.is_rising = False  
 
-        if self.is_visible:
+        if self.is_visible and not self.is_rising:
+            self.float_offset = math.sin((time.time() - self.spawn_time) * 2) * 5
+            self.rect.y = self.final_y + self.float_offset  
+
             self.jaw_offset += self.jaw_direction * self.jaw_speed
             if self.jaw_offset > self.jaw_range:
                 self.jaw_offset = self.jaw_range
@@ -72,10 +92,16 @@ class Zombie:
         jh = self.jaw_image.get_height()
 
         jaw_x = head_bottom_x - jw // 2
-        jaw_y = head_bottom_y - jh + 10  
+        jaw_y = head_bottom_y - jh + 10
         jaw_y += self.jaw_offset  
 
         screen.blit(self.jaw_image, (jaw_x, jaw_y))
+
+        if self.has_helmet and self.helmet_stage < len(self.helmet_images):
+            helmet_img = self.helmet_images[self.helmet_stage]
+            helmet_x = self.rect.x + (self.width // 2) - (helmet_img.get_width() // 2) + 6
+            helmet_y = self.rect.y - 12
+            screen.blit(helmet_img, (helmet_x, helmet_y))
 
     def is_time_out(self):
         if self.is_visible and self.spawn_time is not None:
