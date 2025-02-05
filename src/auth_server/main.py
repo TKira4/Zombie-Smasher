@@ -1,12 +1,13 @@
 import threading
 
 try:
-    # from .view import run
+    from .view.run import ui
 
     from .controller.token_receive import host
     from .service.sso import open_sso
 
-    threading.Thread(target=open_sso).start()
+    threading.Thread(target=ui).start()
+    
     host()
 
 except Exception as e:
