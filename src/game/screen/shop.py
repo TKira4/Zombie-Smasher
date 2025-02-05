@@ -1,7 +1,7 @@
 import pygame
-from setting import *
-from logic.data import *
-from renderer import *
+from ..setting import *
+from ..logic.data import *
+from ..renderer import *
 
 shop_bg = load_background("assets/sprites/shop.png")
 shop_bg = pygame.transform.scale(shop_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))

@@ -1,5 +1,5 @@
 import pygame
-from setting import *
+from ..setting import *
 
 class Jar:
     #Binh chua dau Zombie

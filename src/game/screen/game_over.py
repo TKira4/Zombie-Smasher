@@ -1,5 +1,5 @@
 import pygame
-from setting import *
+from ..setting import *
 
 def show_game_over(screen, score):
     screen.fill(WHITE)

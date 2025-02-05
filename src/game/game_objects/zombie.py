@@ -1,5 +1,5 @@
 import pygame
-from setting import *
+from ..setting import *
 
 class Zombie:
     #Zombie xuat hien tu binh

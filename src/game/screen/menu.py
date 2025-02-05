@@ -1,7 +1,7 @@
 import pygame
-from setting import *
-from screen.shop import *
-from renderer import *
+from ..setting import *
+from .shop import *
+from ..renderer import *
 
 menu_bg = load_background("assets/sprites/menu.png")
 menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))

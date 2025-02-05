@@ -1,5 +1,5 @@
 import pygame
-from setting import *
+from .setting import *
 
 def load_background(image_path):
     return pygame.image.load(image_path)

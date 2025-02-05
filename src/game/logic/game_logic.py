@@ -1,11 +1,12 @@
 import pygame
 import random
-from  logic.data import *
+from  .data import *
 
-from setting import *
-from game_objects.im import *
-from logic.util import check_collision
-from renderer import draw_ui
+from ..setting import *
+from ..game_objects.im import *
+from .util import check_collision
+from ..renderer import draw_ui
+
 #logic chinh cua game
 def start_game(screen, difficulty):
     clock = pygame.time.Clock()

@@ -1,5 +1,5 @@
 import pygame
-from setting import *
+from ..setting import *
 
 class Gun:
     def __init__(self, bullet_limit, image_path, shoot_sound_path):
