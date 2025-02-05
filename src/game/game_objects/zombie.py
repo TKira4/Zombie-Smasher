@@ -2,7 +2,7 @@ import pygame
 import math
 import time
 import random
-from setting import *
+from ..setting import *
 
 class Zombie:
     def __init__(self, jar_x, jar_y, jar_w, jar_h, head_img, jaw_img, helmet_imgs):

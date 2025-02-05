@@ -5,3 +5,4 @@ dist
 build
 
 data.json
+src/auth_server/data/store.json
