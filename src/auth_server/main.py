@@ -1,14 +1,14 @@
 import threading
 
 try:
-    from .controller.token_receive import host
-    from .service.sso_open import sso
+    from .view import run
 
-    fastapi_thread = threading.Thread(target=host)
-    fastapi_thread.start()
+    # from .controller.token_receive import host
+    # from .service.sso import open_sso
 
-    sso()
-    
+    # threading.Thread(target=open_sso).start()
+    # host()
+
 except Exception as e:
     print("Lỗi xác thực người dùng")
     print(str(e))

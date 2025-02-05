@@ -1,15 +1,27 @@
+from multiprocessing import Process
+import threading
+
 def host():
-    from fastapi import FastAPI
-    import uvicorn
+    try:
+        from fastapi import FastAPI
+        import uvicorn
+        from ..service.config_reader import server_port
+            
+        app = FastAPI()
 
-    app = FastAPI()
+        @app.get("/receive")
+        def read_items(token: str = None):
+            if token:
+                from ..service.store_reader import insert_token
+                insert_token(token)
 
-    @app.get("/receive")
-    def read_items(token: str = None):
-        if token:
-            return {"token": f"{token}"}
-        else:
-            return {"message": "No token provided"}
+                from src.game.run import game
+                threading.Thread(target=game).start()
 
-    # Khởi động FastAPI từ trong Python
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+                return {"message": "Xác thực thành công, đang mở ứng dụng"}
+            else:
+                return {"message": "Không thể xác thực :v"}
+
+        uvicorn.run(app, host="127.0.0.1", port=server_port)
+    except Exception as e:
+        pass

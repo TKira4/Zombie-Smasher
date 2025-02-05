@@ -47,7 +47,7 @@ try:
             game_state = "menu"  
 
     pygame.quit()
-    sys.exit()
+    # sys.exit()
 
 except Exception as e:
     import time
