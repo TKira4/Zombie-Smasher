@@ -14,6 +14,7 @@
 - Python 3.9 hoặc cao hơn (Tôi đang sử dụng Python 3.11.9).
 - Thư viện pygame (2.6.0).
 - Visual Studio Code (hoặc các IDE tương tự).
+
 **2. Clone dự án từ Github**
 ```basg
 git clone https://github.com/<username>/Zombie-Smasher.git
@@ -38,7 +39,7 @@ pip install -r requirement.txt
 # Hướng dẫn chạy
 ```basg
 .\venv\Scripts\activate
-python -B .\src\main.py
+python -B -m .\src\main.py
 ```
 # Cấu trúc dự án
 ```plaintext
