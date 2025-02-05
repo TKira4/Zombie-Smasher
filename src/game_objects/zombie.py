@@ -27,9 +27,10 @@ class Zombie:
         self.jaw_speed = 0.2
 
     def show(self):
-        self.is_visible = True
-        self.is_rising = True
-        self.rect.y = self.start_y  
+        if not self.is_visible:
+            self.is_visible = True
+            self.is_rising = True
+            self.rect.y = self.start_y
 
     def hide(self):
         self.is_visible = False

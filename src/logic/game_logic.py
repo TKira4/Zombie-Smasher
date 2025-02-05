@@ -76,7 +76,7 @@ def start_game(screen, difficulty):
         gun.update_reload()
 
         if pygame.time.get_ticks() - last_shoot_time > 5000:
-            add_score(score)  
+            add_score(score)
             data = load_data()
             return score  
 
