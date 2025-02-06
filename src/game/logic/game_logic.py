@@ -62,7 +62,7 @@ def start_game(screen, difficulty):
 
         for jar in jars:
             jar.zombie.update()
-            if random.random() < 0.01:
+            if random.random() < 0.001:
                 jar.zombie.show()
             if jar.zombie.is_time_out():
                 add_score(score)

@@ -1,20 +1,15 @@
 import json
 import os
 
-DATA_FILE = "data.json"
+
 
 def load_data():
-    if not os.path.exists(DATA_FILE):
-        data = {"score": 0, "gun_level": 1}
-        save_data(data)  
-        return data
-
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
+    from src.data.data_handler import data_load
+    return data_load()
 
 def save_data(data):
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=4)
+    from src.data.data_handler import insert_data
+    insert_data(data)
 
 def get_score():
     return load_data().get("score", 0)
