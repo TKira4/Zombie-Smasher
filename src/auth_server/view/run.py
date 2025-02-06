@@ -4,7 +4,6 @@ def ui():
     from PyQt5.QtCore import Qt
     from PyQt5.QtGui import QColor, QPalette
     from ..service.sso import open_sso
-    
 
     def on_button_click():
         label.setText("Button Clicked!") 
