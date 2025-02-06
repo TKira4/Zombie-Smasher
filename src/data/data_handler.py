@@ -22,8 +22,10 @@ def data_load(email:str):
 
     return data
 
-def insert_data(email:str, data):
-    with open(f'src/data/{email.split("@")[0]}.json', 'w') as file:
+def insert_data(data):
+    from src.auth_server.service.store_reader import email_reader
+
+    with open(f'src/data/{email_reader().split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 
 if __name__ == "__main__":
@@ -34,4 +36,9 @@ if __name__ == "__main__":
     # # Lấy dữ liệu:
     # print(data_load("qscvdefb@gmail.com"))
     # print(data_load("khang.tran@gmail.com"))
+
+    insert_data({
+        "score": 0,
+        "gun_level": 1
+    })
     pass
