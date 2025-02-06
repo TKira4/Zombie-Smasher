@@ -1,6 +1,12 @@
-# import threading
+import threading
 
-# from .game.main import game
-# threading.Thread(target=game).start()
+try:
+    from src.auth_server.view.run import ui
 
-from .auth_server import main
+    from src.auth_server.controller.token_receive import host
+    from src.auth_server.service.sso import open_sso
+
+    threading.Thread(target=ui).start()
+    host()
+except Exception as e:
+    print(str(e))
