@@ -2,6 +2,7 @@
 - **Thể loại**: Game Arcade.
 - **Mô tả**: Zombie Smasher là game giải trí, người chơi phải bắn hạ các Zombie xuất hiện từ những chiếc bình bí ẩn. Với thao tác chính là click chuột, người chơi cần nhanh chóng bắn trúng các Zombie để ghi điểm, giữ chuỗi combo, và tránh bị mất máu. Súng sẽ có giới hạn về đạn, vì thế phải tính toán kĩ lưỡng trước khi bắn.
 # Tính năng chính:
+- **Xác thực người dùng**: Xác thực qua sso và mỗi player có dữ liệu riêng.
 - **Lựa chọn độ khó**: Người chơi chọn kích thước kệ (NxN).
 - **Chơi Game**:
     - Zombie sẽ ngẫu nhiên xuất hiện từ những chiếc bình bí ẩn và tấn công người chơi.

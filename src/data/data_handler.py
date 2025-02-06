@@ -2,7 +2,6 @@ import json
 import os
 
 # Internal api do not call
-
 def check_data_exist(email:str):
     file_path = f'src/data/{email.split("@")[0]}.json'
     return os.path.exists(file_path)
@@ -17,7 +16,6 @@ def data_init(email:str):
         json.dump(data, file, indent=4)  
 
 # External api
-
 def data_load(email:str):
     with open(f'src/data/{email.split("@")[0]}.json', 'r') as file:
         data = json.load(file)
