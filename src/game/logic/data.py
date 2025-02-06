@@ -1,5 +1,6 @@
 import json
 import os
+import threading
 
 data = None
 
@@ -22,9 +23,14 @@ def get_point():
     return load_data().get("point", 0)
 
 def add_point(points):
-    data = load_data()
+    global data
+
+    if(data is None):
+        data = load_data()
+
     data["point"] += points
-    save_data(data)
+
+    threading.Thread(target=save_data(data))
     print(f"New point Saved: {data['point']}")  
 
 def upgrade_gun():
@@ -40,7 +46,7 @@ def upgrade_gun():
     if point >= upgrade_cost:
         data["point"] -= upgrade_cost  
         data["gun_level"] += 1  
-        save_data(data)  
+        threading.Thread(target=save_data(data))
         return f"Gun upgraded to level {data['gun_level']}!"
     else:
         return "Not enough points to upgrade!"
