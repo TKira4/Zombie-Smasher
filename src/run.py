@@ -24,8 +24,6 @@ if __name__ == "__main__":
                     print(f"Đã xóa: {file_path}")
             
             os.remove("src/auth_server/data/store.json")
-
-            print("Đã xóa tất cả dữ liều người dùng!")
         except Exception as e:
             pass
         finally:
