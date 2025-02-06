@@ -2,7 +2,7 @@ import sqlite3
 
 class scoreDB:
     def __init__(self):
-        self.conn   = sqlite3.connect('src/data/point.db')
+        self.conn   = sqlite3.connect('data/game_data/point.db')
         self.cursor = self.conn.cursor()
 
     def get_score(self):

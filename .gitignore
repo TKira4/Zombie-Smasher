@@ -3,3 +3,9 @@ venv/
 
 dist
 build
+
+__pycache__
+
+data
+dist
+run.spec

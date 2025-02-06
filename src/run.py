@@ -1,6 +1,8 @@
 import threading
 import argparse
 import os
+import ctypes
+import sys
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Quản lý database")
@@ -14,7 +16,7 @@ if __name__ == "__main__":
 
             score_db.clear()    
             
-            folder_path ="src/data/player"
+            folder_path ="data/game_data/player"
 
             for file_name in os.listdir(folder_path):
                 file_path = os.path.join(folder_path, file_name)
@@ -23,7 +25,7 @@ if __name__ == "__main__":
                     os.remove(file_path)
                     print(f"Đã xóa: {file_path}")
             
-            os.remove("src/auth_server/data/store.json")
+            os.remove("data/auth/store.json")
         except Exception as e:
             pass
         finally:
@@ -35,6 +37,9 @@ if __name__ == "__main__":
             from src.auth_server.controller.token_receive import host
 
             threading.Thread(target=ui).start()
-            host()
+            threading.Thread(target=host).start()
         except Exception as e:
             print(str(e))
+            import time
+
+            time.sleep(10)
