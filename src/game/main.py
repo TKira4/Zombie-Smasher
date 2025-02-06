@@ -12,8 +12,6 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Zombie Smasher")
 
-game_bg = load_background("assets/sprites/game.png")
-
 try:
     running = True
     game_state = "menu"
@@ -29,7 +27,8 @@ try:
                 if difficulty == "back":
                     game_state = "menu"
                 else:
-                    pygame.time.delay(1000)
+                    #pygame.time.delay(1000)
+                    show_loading_screen(screen)
                     game_state = "playing"
             elif selected_action == "shop":
                 show_shop(screen)  
@@ -41,12 +40,12 @@ try:
         elif game_state == "playing":
             #screen.fill(WHITE)  #xoa man hinh truoc khi ve
             #draw_background(screen, game_bg)
-            score = start_game(screen, difficulty)
+            score, max_combo, miss_hit = start_game(screen, difficulty)
             insert_point_to_table(score)
             game_state = "game_over"
     
         elif game_state == "game_over":
-            show_game_over(screen, score)
+            show_game_over(screen, score, max_combo, miss_hit)
             game_state = "menu"  
 
     pygame.quit()

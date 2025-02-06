@@ -1,12 +1,17 @@
 import pygame
 import random
-from  ..logic.data import *
 
+from ..renderer import *
+from  ..logic.data import *
 from ..setting import *
 from ..game_objects.im import *
 from .util import check_collision
 from ..renderer import draw_ui
 #logic chinh cua game
+
+game_bg = load_background("assets/sprites/game.png")
+game_bg = pygame.transform.scale(game_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
 def start_game(screen, difficulty):
     clock = pygame.time.Clock()
     global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images
@@ -34,9 +39,11 @@ def start_game(screen, difficulty):
     combo = 0
     running = True
 
+    max_combo = 0
+    miss_hit = 0
     while running:
-        screen.fill(WHITE)
-
+        #screen.fill(WHITE)
+        draw_background(screen, game_bg)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return score
@@ -54,7 +61,10 @@ def start_game(screen, difficulty):
                             break
                     if not hit:
                         combo = 0
+                        miss_hit += 1
 
+            max_combo = max(max_combo, combo)
+            
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 gun.reload()
                 
@@ -67,7 +77,7 @@ def start_game(screen, difficulty):
             if jar.zombie.is_time_out():
                 add_point(score)
                 data = load_data()
-                return score
+                return score, max_combo, miss_hit
             jar.draw(screen)
 
         gun.update_reload()
