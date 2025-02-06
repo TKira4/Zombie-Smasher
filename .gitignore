@@ -3,7 +3,3 @@ venv/
 
 dist
 build
-
-*.json
-
-src/auth_server/data/store.json

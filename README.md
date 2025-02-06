@@ -1,3 +1,7 @@
+# Các lệnh:
+- **Xóa dữ liệu**: python -B -m src.run --clear_db
+- **Chạy chương trình**: python -B -m src.run 
+
 # Zombie Smasher
 - **Thể loại**: Game Arcade.
 - **Mô tả**: Zombie Smasher là game giải trí, người chơi phải bắn hạ các Zombie xuất hiện từ những chiếc bình bí ẩn. Với thao tác chính là click chuột, người chơi cần nhanh chóng bắn trúng các Zombie để ghi điểm, giữ chuỗi combo, và tránh bị mất máu. Súng sẽ có giới hạn về đạn, vì thế phải tính toán kĩ lưỡng trước khi bắn.
