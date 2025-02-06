@@ -3,7 +3,7 @@ import os
 
 # Internal api do not call
 def check_data_exist(email:str):
-    file_path = f'src/data/{email.split("@")[0]}.json'
+    file_path = f'src/data/player/{email.split("@")[0]}.json'
     return os.path.exists(file_path)
 
 def data_init(email:str):
@@ -12,14 +12,14 @@ def data_init(email:str):
         "gun_level": 1
     }
 
-    with open(f'src/data/{email.split("@")[0]}.json', 'w') as file:
+    with open(f'src/data/player/{email.split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 
 # External api
 def data_load():
     from src.auth_server.service.store_reader import email_reader
 
-    with open(f'src/data/{email_reader().split("@")[0]}.json', 'r') as file:
+    with open(f'src/data/player/{email_reader().split("@")[0]}.json', 'r') as file:
         data = json.load(file)
 
     return data
@@ -27,7 +27,7 @@ def data_load():
 def insert_data(data):
     from src.auth_server.service.store_reader import email_reader
 
-    with open(f'src/data/{email_reader().split("@")[0]}.json', 'w') as file:
+    with open(f'src/data/player/{email_reader().split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 
 if __name__ == "__main__":
