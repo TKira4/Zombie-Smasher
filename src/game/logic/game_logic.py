@@ -14,7 +14,7 @@ game_bg = pygame.transform.scale(game_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 def start_game(screen, difficulty):
     clock = pygame.time.Clock()
-    global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images, zombie_head_dead_image
+    global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images, zombie_head_dead_image, zombie_hit_effect_image
     
     new_size = WINDOW_WIDTH // (difficulty+4)
 
@@ -27,6 +27,7 @@ def start_game(screen, difficulty):
         pygame.image.load("assets/sprites/Zombie_football_helmet3.png")
     ]
     zombie_head_dead_image = pygame.image.load("assets/sprites/zombie_head_dead.png")
+    zombie_hit_effect_image = pygame.image.load("assets/sprites/hiteffect.png")
     jar_image = pygame.image.load("assets/sprites/jar.png")
 
     zombie_head_image = pygame.transform.scale(zombie_head_image, (new_size * zombie_head_image.get_width() // 100, new_size * zombie_head_image.get_height() // 100))
@@ -77,7 +78,6 @@ def start_game(screen, difficulty):
                 jar.zombie.show()
             if jar.zombie.is_time_out():
                 add_point(score)
-                data = load_data()
                 return score, max_combo, miss_hit
             jar.draw(screen)
 
@@ -102,7 +102,7 @@ def create_jars(n, size):
             x = start_x + j * (size + padding)  
             y = start_y + i * (size + padding)  
 
-            zombie = Zombie(x, y, size, size, zombie_head_image, zombie_jaw_image, zombie_helmet_images, zombie_head_dead_image)
+            zombie = Zombie(x, y, size, size, zombie_head_image, zombie_jaw_image, zombie_helmet_images, zombie_head_dead_image, zombie_hit_effect_image)
             jar = Jar(x, y, jar_image, zombie)
             jars.append(jar)
 
