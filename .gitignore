@@ -4,5 +4,6 @@ venv/
 dist
 build
 
-data.json
+*.json
+
 src/auth_server/data/store.json

@@ -50,6 +50,5 @@ try:
     # sys.exit()
 
 except Exception as e:
-    import time
-    time.sleep(10)
+    print(str(e))
     pass

@@ -9,21 +9,25 @@ def check_data_exist(email:str):
 def data_init(email:str):
     data = {
         "score": 0,
-        "gun_level": 0
+        "gun_level": 1
     }
 
     with open(f'src/data/{email.split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 
 # External api
-def data_load(email:str):
-    with open(f'src/data/{email.split("@")[0]}.json', 'r') as file:
+def data_load():
+    from src.auth_server.service.store_reader import email_reader
+
+    with open(f'src/data/{email_reader().split("@")[0]}.json', 'r') as file:
         data = json.load(file)
 
     return data
 
-def insert_data(email:str, data):
-    with open(f'src/data/{email.split("@")[0]}.json', 'w') as file:
+def insert_data(data):
+    from src.auth_server.service.store_reader import email_reader
+
+    with open(f'src/data/{email_reader().split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 
 if __name__ == "__main__":
@@ -34,4 +38,9 @@ if __name__ == "__main__":
     # # Lấy dữ liệu:
     # print(data_load("qscvdefb@gmail.com"))
     # print(data_load("khang.tran@gmail.com"))
+
+    insert_data({
+        "score": 0,
+        "gun_level": 1
+    })
     pass

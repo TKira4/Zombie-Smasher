@@ -15,11 +15,11 @@ def host():
         @app.get("/receive")
         def read_items(token: str = None):
             if token:
-                from ..service.store_reader import insert_token
-                insert_token(token)
-
                 email = requests.get(f"{url}?token={token}").json()["message"]["sub"]
                 from src.data.data_handler import check_data_exist, data_init
+
+                from ..service.store_reader import insert_token
+                insert_token(email, token)
 
                 if(not check_data_exist(email)):
                     data_init(email)
