@@ -1,17 +1,24 @@
 import json
 import os
 
-
+data = None
 
 def load_data():
+    global data
+
     from src.data.data_handler import data_load
-    return data_load()
+
+    data = data_load()
+    return data
 
 def save_data(data):
     from src.data.data_handler import insert_data
     insert_data(data)
 
 def get_score():
+    if(data is not None):
+        return data["score"]
+    
     return load_data().get("score", 0)
 
 def add_score(scores):
@@ -21,7 +28,11 @@ def add_score(scores):
     print(f"New Score Saved: {data['score']}")  
 
 def upgrade_gun():
-    data = load_data()
+    global data
+
+    if(data is None):
+        data = load_data()
+    
     gun_level = data.get("gun_level", 1)
     score = data.get("score", 0)
 
@@ -35,4 +46,7 @@ def upgrade_gun():
         return "Not enough points to upgrade!"
 
 def get_gun_level():
+    if(data is not None):
+        return data["gun_level"]
+    
     return load_data().get("gun_level", 1)
