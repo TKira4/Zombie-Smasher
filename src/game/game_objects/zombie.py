@@ -9,7 +9,7 @@ class Zombie:
         self.head_image = head_img
         self.jaw_image = jaw_img
         self.helmet_images = helmet_imgs
-        self.has_helmet = random.choice([True, False])
+        self.has_helmet = random.choices([True, False], weights=[0.2, 0.8], k=1)[0]
         self.helmet_stage = 0 if self.has_helmet else -1
 
         self.rect = self.head_image.get_rect()
