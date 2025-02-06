@@ -20,7 +20,7 @@ def host():
                 from src.data.data_handler import check_data_exist, data_init
 
                 from ..service.store_reader import insert_token
-                insert_token(email, token)
+                insert_token(token)
 
                 if(not check_data_exist(email)):
                     data_init(email)

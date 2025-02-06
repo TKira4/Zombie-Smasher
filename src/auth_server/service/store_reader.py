@@ -10,13 +10,18 @@ def token_reader():
         return data["token"]
     
 def email_reader():
+    import requests
+    url = "https://sso.hcmutssps.id.vn/api/verifyToken.php"
+
     with open(json_file_path, 'r') as file:
         data = json.load(file)
 
-        return data["email"]
+        token = data["token"]
 
-def insert_token(email:str, token: str):
-    data = {"token": token, "email": email}
+        return requests.get(f"{url}?token={token}").json()["message"]["sub"]
+
+def insert_token(token: str):
+    data = {"token": token}
 
     with open(json_file_path, 'w') as file:
         json.dump(data, file, indent=4)  
