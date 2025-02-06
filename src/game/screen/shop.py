@@ -13,7 +13,7 @@ def show_shop(screen):
         draw_background(screen, shop_bg)
         draw_text(screen, "SHOP - UPGRADE GUN", WINDOW_WIDTH // 2 - 125, 50, 48, LIGHT_GRAY)
 
-        score = get_score()
+        score = get_point()
         gun_level = get_gun_level()
         upgrade_cost = gun_level * 100
 

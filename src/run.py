@@ -1,10 +1,13 @@
 import threading
+import argparse
 
-try:
-    from src.auth_server.view.run import ui
-    from src.auth_server.controller.token_receive import host
+if __name__ == "__main__":
 
-    threading.Thread(target=ui).start()
-    host()
-except Exception as e:
-    print(str(e))
+    try:
+        from src.auth_server.view.run import ui
+        from src.auth_server.controller.token_receive import host
+
+        threading.Thread(target=ui).start()
+        host()
+    except Exception as e:
+        print(str(e))
