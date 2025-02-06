@@ -1,19 +1,24 @@
 import pygame
 import random
-from  ..logic.data import *
 
+from ..renderer import *
+from  ..logic.data import *
 from ..setting import *
 from ..game_objects.im import *
 from .util import check_collision
 from ..renderer import draw_ui
 #logic chinh cua game
+
+game_bg = load_background("assets/sprites/game.png")
+game_bg = pygame.transform.scale(game_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
 def start_game(screen, difficulty):
     clock = pygame.time.Clock()
-    global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images
+    global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images, zombie_head_dead_image, zombie_hit_effect_image
     
     new_size = WINDOW_WIDTH // (difficulty+4)
 
-    gun = Gun(BULLET_LIMIT + get_gun_level() // 5, "assets/sprites/aimGun.png", "assets/sound/8bit_gunloop_explosion.wav")
+    gun = Gun(BULLET_LIMIT + get_gun_level() // 5, "assets/sprites/aimGun.png", "assets/sound/CloseTheCage.ogg")
     zombie_head_image = pygame.image.load("assets/sprites/zombie_head.png")
     zombie_jaw_image = pygame.image.load("assets/sprites/zombie_jaw.png")
     zombie_helmet_images = [
@@ -21,11 +26,14 @@ def start_game(screen, difficulty):
         pygame.image.load("assets/sprites/Zombie_football_helmet2.png"),
         pygame.image.load("assets/sprites/Zombie_football_helmet3.png")
     ]
+    zombie_head_dead_image = pygame.image.load("assets/sprites/zombie_head_dead.png")
+    zombie_hit_effect_image = pygame.image.load("assets/sprites/hiteffect.png")
     jar_image = pygame.image.load("assets/sprites/jar.png")
 
     zombie_head_image = pygame.transform.scale(zombie_head_image, (new_size * zombie_head_image.get_width() // 100, new_size * zombie_head_image.get_height() // 100))
     zombie_jaw_image = pygame.transform.scale(zombie_jaw_image, (new_size * zombie_jaw_image.get_width() // 100, new_size * zombie_jaw_image.get_height() // 100))
     zombie_helmet_images = [pygame.transform.scale(img, (new_size * img.get_width() // 100, new_size * img.get_height() // 100)) for img in zombie_helmet_images]
+    zombie_head_dead_image = pygame.transform.scale(zombie_head_dead_image, (new_size * zombie_head_dead_image.get_width() // 100, new_size * zombie_head_dead_image.get_height() // 100))
     jar_image = pygame.transform.scale(jar_image, (new_size, new_size))
 
     jars = create_jars(difficulty, new_size)
@@ -34,9 +42,10 @@ def start_game(screen, difficulty):
     combo = 0
     running = True
 
+    max_combo = 0
+    miss_hit = 0
     while running:
-        screen.fill(WHITE)
-
+        draw_background(screen, game_bg)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return score
@@ -45,7 +54,7 @@ def start_game(screen, difficulty):
                 if gun.shoot():
                     hit = False
                     for jar in jars:
-                        if jar.zombie.is_visible and check_collision(event.pos, jar.zombie.rect):
+                        if jar.zombie.is_visible and not jar.zombie.is_invulnerable and check_collision(event.pos, jar.zombie.rect):
                             jar.zombie.hit()
                             hit = True
                             gun.play_hit_sound()
@@ -54,7 +63,10 @@ def start_game(screen, difficulty):
                             break
                     if not hit:
                         combo = 0
+                        miss_hit += 1
 
+            max_combo = max(max_combo, combo)
+            
             if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 gun.reload()
                 
@@ -66,8 +78,7 @@ def start_game(screen, difficulty):
                 jar.zombie.show()
             if jar.zombie.is_time_out():
                 add_point(score)
-                data = load_data()
-                return score
+                return score, max_combo, miss_hit
             jar.draw(screen)
 
         gun.update_reload()
@@ -91,7 +102,7 @@ def create_jars(n, size):
             x = start_x + j * (size + padding)  
             y = start_y + i * (size + padding)  
 
-            zombie = Zombie(x, y, size, size, zombie_head_image, zombie_jaw_image, zombie_helmet_images)
+            zombie = Zombie(x, y, size, size, zombie_head_image, zombie_jaw_image, zombie_helmet_images, zombie_head_dead_image, zombie_hit_effect_image)
             jar = Jar(x, y, jar_image, zombie)
             jars.append(jar)
 

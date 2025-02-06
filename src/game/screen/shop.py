@@ -12,7 +12,7 @@ def show_shop(screen):
     while True:
         draw_background(screen, shop_bg)
         draw_text(screen, "SHOP - UPGRADE GUN", WINDOW_WIDTH // 2 - 125, 50, 48, LIGHT_GRAY)
-
+        draw_text(screen, "Each 5 levels of gun, Bullets limit increase by 1", WINDOW_WIDTH // 2 - 200, 85, 40, YELLOW)
         score = get_point()
         gun_level = get_gun_level()
         upgrade_cost = gun_level * 100

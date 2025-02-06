@@ -2,20 +2,23 @@ import pygame
 from ..setting import *
 from .shop import *
 from ..renderer import *
+from src.auth_server.service.store_reader import email_reader
 
 menu_bg = load_background("assets/sprites/menu.png")
 menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
+email = email_reader().split('@')[0]
 
 def show_menu(screen):
     while True:
         draw_background(screen, menu_bg)
         #screen.fill(WHITE)
         draw_text(screen, "Zombie Smasher", WINDOW_WIDTH // 2 - 125, 50, 48, GRAY)
-
+        draw_text(screen, "Hello", WINDOW_WIDTH // 2 - 125, 85, 25, WHITE)
+        draw_text(screen, f"{email}", WINDOW_WIDTH // 2 - 75, 85, 25, YELLOW)
         start_button = draw_button(screen, "Start Game", WINDOW_WIDTH // 2 -125, 150, 200, 50, GREEN, DARK_GREEN)
         shop_button = draw_button(screen, "Shop", WINDOW_WIDTH // 2 - 125, 250, 200, 50, BLUE, DARK_BLUE)
         leaderboard_button = draw_button(screen, "Ranks", WINDOW_WIDTH // 2 - 125, 350, 200, 50, YELLOW, DARK_GRAY)
-        exit_button = draw_button(screen, "Exit Game", WINDOW_WIDTH // 2 - 125, 400, 200, 50, RED, DARK_RED)
+        exit_button = draw_button(screen, "Exit Game", WINDOW_WIDTH // 2 - 125, 450, 200, 50, RED, DARK_RED)
         
         pygame.display.flip()
 

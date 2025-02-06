@@ -11,8 +11,13 @@ def data_init(email:str):
         "point": 0,
         "gun_level": 1
     }
+<<<<<<< HEAD
 
     with open(f'data/game_data/player/{email.split("@")[0]}.json', 'w') as file:
+=======
+    os.makedirs('src/data/player', exist_ok=True)
+    with open(f'src/data/player/{email.split("@")[0]}.json', 'w') as file:
+>>>>>>> 9ef4236ee08ac9db3481de2ad83b4c752d59ae58
         json.dump(data, file, indent=4)  
 
 # External api
