@@ -8,7 +8,7 @@ def check_data_exist(email:str):
 
 def data_init(email:str):
     data = {
-        "score": 0,
+        "point": 0,
         "gun_level": 1
     }
 
