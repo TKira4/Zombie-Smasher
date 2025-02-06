@@ -11,7 +11,7 @@ def data_init(email:str):
         "point": 0,
         "gun_level": 1
     }
-
+    os.makedirs('src/data/player', exist_ok=True)
     with open(f'src/data/player/{email.split("@")[0]}.json', 'w') as file:
         json.dump(data, file, indent=4)  
 

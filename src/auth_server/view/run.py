@@ -33,7 +33,7 @@ def ui():
     layout = QVBoxLayout()
 
     # Thêm label hiển thị chữ "Hello", căn giữa và thay đổi font
-    label = QLabel("Mẹ Mày Béo", window)
+    label = QLabel("Xin lỗi em, Amanai. Anh không giận gì em đâu. Anh cũng chả hận thù gì người trên cõi đời này. Anh thấy, thế gian giờ thật tươi đẹp biết bao. Cảnh chim bay bướm lượn, hoa lá nở xum xuê 'Thiên thượng thiên hạ. Duy ngã độc tôn.'\nCái lợi của thuật thức di truyền đó là đã được biết và giảng giải tường tận. Nhưng đi kèm theo đó cũng là bất lợi khi thông tin thuật thức dễ dàng bị tuồng ra ngoài.\nXem ra ngươi chí ít đã từng sống cùng tộc nhân Zen'in một thời gian nên mới hiểu rõ cách Vô Hạ Hạn hoạt động.\nNhưng kể cả có là tộc nhân nhà Gojo cũng chỉ lác đác vài kẻ biết đến \"thứ này\". Thuận và đảo, xuôi và nghịch, hai thứ năng lượng trái dấu xung khắc nhau đến vô tận tạo ra luồng uy lực cực hạn từ hư không.\nHư Thức: Tử\" 🫸🏻🔴🔵🫷🏻🤌🏻🫴🏻🟣\"", window)
     label.setAlignment(Qt.AlignCenter)  # Căn giữa chữ
     layout.addWidget(label)
 
