@@ -6,46 +6,58 @@ class scoreDB:
         self.cursor = self.conn.cursor()
 
     def get_score(self):
-        self.cursor.execute('''
-            SELECT * FROM score
-            ORDER BY score DESC
-            LIMIT 10
-        ''')
+        try:
+            self.cursor.execute('''
+                SELECT * FROM score
+                ORDER BY score DESC
+                LIMIT 10
+            ''')
 
-        self.conn.commit()
+            self.conn.commit()
 
-        return self.cursor.fetchall()
+            return self.cursor.fetchall()
+        except:
+            self.conn.rollback()
         
     def update_score(self, score):
-        from src.auth_server.service.store_reader import email_reader
+        try:
+            from src.auth_server.service.store_reader import email_reader
 
-        self.cursor.execute('''
-            UPDATE score
-            SET score = CASE 
-                            WHEN ? > score THEN ?  
-                            ELSE score  
-                        END
-            WHERE username = ?;
-        ''', (score, score, email_reader().split("@")[0]))
+            self.cursor.execute('''
+                UPDATE score
+                SET score = CASE 
+                                WHEN ? > score THEN ?  
+                                ELSE score  
+                            END
+                WHERE username = ?;
+            ''', (score, score, email_reader().split("@")[0]))
 
-        self.conn.commit()
+            self.conn.commit()
+        except:
+            self.conn.rollback()
 
     def init_score(self):
-        from src.auth_server.service.store_reader import email_reader
+        try:
+            from src.auth_server.service.store_reader import email_reader
 
-        self.cursor.execute('''
-            INSERT INTO score (username, score)
-            VALUES (?, ?)
-        ''', (email_reader().split("@")[0], 0))
+            self.cursor.execute('''
+                INSERT INTO score (username, score)
+                VALUES (?, ?)
+            ''', (email_reader().split("@")[0], 0))
 
-        self.conn.commit()
+            self.conn.commit()
+        except:
+            self.conn.rollback()
 
     def clear(self):
-        self.cursor.execute('''
-            DELETE FROM score
-        ''')
+        try:
+            self.cursor.execute('''
+                DELETE FROM score
+            ''')
 
-        self.conn.commit()
+            self.conn.commit()
+        except:
+            self.conn.rollback()
 
     def __del__(self):
         self.conn.close()
