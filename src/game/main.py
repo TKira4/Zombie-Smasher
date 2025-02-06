@@ -41,6 +41,7 @@ try:
             #screen.fill(WHITE)  #xoa man hinh truoc khi ve
             #draw_background(screen, game_bg)
             score, max_combo, miss_hit = start_game(screen, difficulty)
+            show_jumpscare(screen)
             insert_point_to_table(score)
             game_state = "game_over"
     

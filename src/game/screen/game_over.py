@@ -9,6 +9,6 @@ def show_game_over(screen, score, max_combo, miss_hit):
     draw_background(screen, game_over_bg)
     draw_text(screen, f"Score: {score}", 50, 50, 36, WHITE)
     draw_text(screen, f"Max_combo: {max_combo}", 250, 50, 36, RED)
-    draw_text(screen, f"Miss_hit: {miss_hit}", 450, 50, 36, YELLOW)
+    draw_text(screen, f"Miss_hit: {miss_hit}", 550, 50, 36, YELLOW)
     pygame.display.flip()
     pygame.time.wait(3000)
