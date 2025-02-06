@@ -33,6 +33,8 @@ try:
                     game_state = "playing"
             elif selected_action == "shop":
                 show_shop(screen)  
+            elif selected_action == "rank":
+                show_leaderboard(screen)
             elif selected_action == "exit":
                 running = False  
 
@@ -40,6 +42,7 @@ try:
             #screen.fill(WHITE)  #xoa man hinh truoc khi ve
             #draw_background(screen, game_bg)
             score = start_game(screen, difficulty)
+            insert_point_to_table(score)
             game_state = "game_over"
     
         elif game_state == "game_over":

@@ -14,8 +14,9 @@ def show_menu(screen):
 
         start_button = draw_button(screen, "Start Game", WINDOW_WIDTH // 2 -125, 150, 200, 50, GREEN, DARK_GREEN)
         shop_button = draw_button(screen, "Shop", WINDOW_WIDTH // 2 - 125, 250, 200, 50, BLUE, DARK_BLUE)
-        exit_button = draw_button(screen, "Exit Game", WINDOW_WIDTH // 2 - 125, 350, 200, 50, RED, DARK_RED)
-
+        leaderboard_button = draw_button(screen, "Ranks", WINDOW_WIDTH // 2 - 125, 350, 200, 50, YELLOW, DARK_GRAY)
+        exit_button = draw_button(screen, "Exit Game", WINDOW_WIDTH // 2 - 125, 400, 200, 50, RED, DARK_RED)
+        
         pygame.display.flip()
 
         for event in pygame.event.get():
@@ -25,10 +26,13 @@ def show_menu(screen):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if start_button.collidepoint(event.pos):
                     return "start"
-                if shop_button.collidepoint(event.pos):
+                elif shop_button.collidepoint(event.pos):
                     return "shop"
-                if exit_button.collidepoint(event.pos):
+                elif leaderboard_button.collidepoint(event.pos):
+                    return "rank"
+                elif exit_button.collidepoint(event.pos):
                     pygame.quit()
+                
                     exit()
 
 
@@ -36,8 +40,8 @@ def show_difficulty_menu(screen):
     font_size = 48
     options = [
         ("Easy (3x3)", 3),
-        ("Medium (5x5)", 5),
-        ("Hard (7x7)", 7),
+        ("Medium (4x4)", 4),
+        ("Hard (5x5)", 5),
     ]
 
     selected_difficulty = None

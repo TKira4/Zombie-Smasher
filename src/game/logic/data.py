@@ -22,6 +22,16 @@ def get_point():
     
     return load_data().get("point", 0)
 
+def insert_point_to_table(score):
+    from src.data.score_query import scoreDB
+    score_db = scoreDB()
+    score_db.update_score(score)
+    
+def rankings():
+    from src.data.score_query import scoreDB
+    score_db = scoreDB()
+    return score_db.get_score()
+
 def add_point(points):
     global data
 

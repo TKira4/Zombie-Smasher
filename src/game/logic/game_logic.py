@@ -11,7 +11,7 @@ def start_game(screen, difficulty):
     clock = pygame.time.Clock()
     global zombie_head_image, zombie_jaw_image, jar_image, zombie_helmet_images
     
-    new_size = WINDOW_WIDTH // (difficulty+2)
+    new_size = WINDOW_WIDTH // (difficulty+4)
 
     gun = Gun(BULLET_LIMIT + get_gun_level() // 5, "assets/sprites/aimGun.png", "assets/sound/8bit_gunloop_explosion.wav")
     zombie_head_image = pygame.image.load("assets/sprites/zombie_head.png")
