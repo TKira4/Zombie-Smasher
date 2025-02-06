@@ -40,7 +40,7 @@ def add_point(points):
 
     data["point"] += points
 
-    threading.Thread(target=save_data(data))
+    threading.Thread(target=save_data(data)).start()
     print(f"New point Saved: {data['point']}")  
 
 def upgrade_gun():
@@ -49,14 +49,14 @@ def upgrade_gun():
     if(data is None):
         data = load_data()
     
-    gun_level = data.get("gun_level", 1)
-    point = data.get("point", 0)
+    gun_level = data["gun_level"]
+    point = data["point"]
 
     upgrade_cost = gun_level * 100
     if point >= upgrade_cost:
         data["point"] -= upgrade_cost  
         data["gun_level"] += 1  
-        threading.Thread(target=save_data(data))
+        threading.Thread(target=save_data(data)).start()
         return f"Gun upgraded to level {data['gun_level']}!"
     else:
         return "Not enough points to upgrade!"
@@ -65,4 +65,4 @@ def get_gun_level():
     if(data is not None):
         return data["gun_level"]
     
-    return load_data().get("gun_level", 1)
+    return load_data()["gun_level"]
