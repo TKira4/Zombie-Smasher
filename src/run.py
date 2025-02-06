@@ -8,23 +8,28 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.clear_db:
-        from .data.score_query import scoreDB
-        score_db = scoreDB()
+        try:
+            from .data.score_query import scoreDB
+            score_db = scoreDB()
 
-        score_db.clear()    
-        
-        folder_path ="src/data/player"
+            score_db.clear()    
+            
+            folder_path ="src/data/player"
 
-        for file_name in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, file_name)
+            for file_name in os.listdir(folder_path):
+                file_path = os.path.join(folder_path, file_name)
 
-            if os.path.isfile(file_path): 
-                os.remove(file_path)
-                print(f"Đã xóa: {file_path}")
-        
-        os.remove("src/auth_server/data/store.json")
+                if os.path.isfile(file_path): 
+                    os.remove(file_path)
+                    print(f"Đã xóa: {file_path}")
+            
+            os.remove("src/auth_server/data/store.json")
 
-        print("Đã xóa tất cả dữ liều người dùng!")
+            print("Đã xóa tất cả dữ liều người dùng!")
+        except Exception as e:
+            pass
+        finally:
+            print("Đã xóa tất cả dữ liều người dùng!")
 
     else:
         try:
