@@ -24,6 +24,9 @@ def host():
 
                 if(not check_data_exist(email)):
                     data_init(email)
+                    from src.data.score_query import scoreDB
+                    score_db = scoreDB()
+                    score_db.init_score()
 
                 from src.game.run import game
                 threading.Thread(target=game).start()
