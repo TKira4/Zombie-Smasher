@@ -29,7 +29,7 @@ class scoreDB:
                                 WHEN ? > score THEN ?  
                                 ELSE score  
                             END
-                WHERE username = ?;
+                WHERE username = ? AND score != 0;
             ''', (score, score, email_reader().split("@")[0]))
 
             self.conn.commit()

@@ -6,7 +6,18 @@ from src.auth_server.service.store_reader import email_reader
 
 menu_bg = load_background("assets/sprites/menu.png")
 menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
+
 email = email_reader().split('@')[0]
+
+def email_scan():
+    def email_change():
+        email = email_reader().split('@')[0]
+
+    import time
+    import threading
+    while True:
+        threading.Thread(target=email_change).start()
+        time.sleep(3)
 
 def show_menu(screen):
     while True:
