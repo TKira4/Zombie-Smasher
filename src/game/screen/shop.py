@@ -12,14 +12,14 @@ def show_shop(screen):
     while True:
         draw_background(screen, shop_bg)
         draw_text(screen, "SHOP - UPGRADE GUN", WINDOW_WIDTH // 2 - 125, 50, 48, LIGHT_GRAY)
-        draw_text(screen, "Each 5 levels of gun, Bullets limit increase by 1", WINDOW_WIDTH // 2 - 200, 85, 40, YELLOW)
+        draw_text(screen, "Each 5 levels of gun, Bullets limit increase by 1", WINDOW_WIDTH // 2 - 200, 85, 32, YELLOW)
         score = get_point()
         gun_level = get_gun_level()
         upgrade_cost = gun_level * 100
 
-        draw_text(screen, f"Your Score: {score}", 500, 200, 36, WHITE)
-        draw_text(screen, f"Gun Level: {gun_level}", 500, 250, 36, WHITE)
-        draw_text(screen, f"Upgrade Cost: {upgrade_cost} Points", 500, 300, 36, WHITE)
+        draw_text(screen, f"Your Score: {score}", 450, 200, 36, WHITE)
+        draw_text(screen, f"Gun Level: {gun_level}", 450, 250, 36, WHITE)
+        draw_text(screen, f"Upgrade Cost: {upgrade_cost} Points", 450, 300, 36, WHITE)
 
         upgrade_button = draw_button(screen, "Upgrade Gun", 500, 350, 200, 50, YELLOW, DARK_GREEN, BLACK)
         back_button = draw_button(screen, "Back", 25, 50, 100, 50, RED, DARK_RED, BLACK)
@@ -38,6 +38,7 @@ def show_shop(screen):
                 if upgrade_button.collidepoint(event.pos):
                     message = upgrade_gun()
                     message_timer = pygame.time.get_ticks()
+                    pygame.mouse.set_visible(True)
                 if back_button.collidepoint(event.pos):
                     return 
                 

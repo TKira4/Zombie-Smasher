@@ -45,20 +45,22 @@ def add_point(points):
 
 def upgrade_gun():
     global data
-
+    from ..game_objects.gun import Gun
     if(data is None):
         data = load_data()
     
     gun_level = data["gun_level"]
     point = data["point"]
-
+    gun = Gun(10, "assets/sprites/aimGun.png", "assets/sound/CloseTheCage.ogg")
     upgrade_cost = gun_level * 100
     if point >= upgrade_cost:
         data["point"] -= upgrade_cost  
         data["gun_level"] += 1  
         threading.Thread(target=save_data(data)).start()
+        gun.succes_sound.play()
         return f"Gun upgraded to level {data['gun_level']}!"
     else:
+        gun.fail_sound.play()
         return "Not enough points to upgrade!"
 
 def get_gun_level():

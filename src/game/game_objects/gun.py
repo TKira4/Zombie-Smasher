@@ -14,9 +14,10 @@ class Gun:
         self.is_reloading = False
         self.reload_start_time = 0
         self.shoot_sound.set_volume(0.3)  
-        self.hit_sound.set_volume(1)    
+        self.hit_sound.set_volume(0.2)    
         self.reload_sound.set_volume(0.5) 
-        
+        self.succes_sound = pygame.mixer.Sound("assets/sound/upgrade_sound.mp3")
+        self.fail_sound = pygame.mixer.Sound("assets/sound/fail.mp3")
         pygame.mouse.set_visible(False) #an con tro chuot
         
     def shoot(self):
@@ -48,5 +49,10 @@ class Gun:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+    
+    def success(self):
+        self.success_sound.play()
         
+    def fail(self):
+        self.fail_sound.play()
 

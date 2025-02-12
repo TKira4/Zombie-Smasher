@@ -17,7 +17,6 @@ def email_scan():
     def email_change():
         global email
         email = email_reader().split('@')[0]
-        print(email)
 
     import time
     import threading
