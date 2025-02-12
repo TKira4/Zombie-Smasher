@@ -9,23 +9,32 @@ menu_bg = pygame.transform.scale(menu_bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
 
 email = email_reader().split('@')[0]
 
+def get_email():
+    return email
+
 def email_scan():
+    global email
     def email_change():
+        global email
         email = email_reader().split('@')[0]
+        print(email)
 
     import time
     import threading
     while True:
-        threading.Thread(target=email_change).start()
+        email_change()
         time.sleep(3)
 
 def show_menu(screen):
+    import threading
+    threading.Thread(target=email_scan).start()
+
     while True:
         draw_background(screen, menu_bg)
         #screen.fill(WHITE)
         draw_text(screen, "Zombie Smasher", WINDOW_WIDTH // 2 - 125, 50, 48, GRAY)
         draw_text(screen, "Hello", WINDOW_WIDTH // 2 - 125, 85, 25, WHITE)
-        draw_text(screen, f"{email}", WINDOW_WIDTH // 2 - 75, 85, 25, YELLOW)
+        draw_text(screen, f"{get_email()}", WINDOW_WIDTH // 2 - 75, 85, 25, YELLOW)
         start_button = draw_button(screen, "Start Game", WINDOW_WIDTH // 2 -125, 150, 200, 50, GREEN, DARK_GREEN)
         shop_button = draw_button(screen, "Shop", WINDOW_WIDTH // 2 - 125, 250, 200, 50, BLUE, DARK_BLUE)
         leaderboard_button = draw_button(screen, "Ranks", WINDOW_WIDTH // 2 - 125, 350, 200, 50, YELLOW, DARK_GRAY)
