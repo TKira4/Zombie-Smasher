@@ -22,7 +22,10 @@ def email_scan():
     import time
     import threading
     while True:
-        email_change()
+        try:
+            email_change()
+        except:
+            pass
         time.sleep(3)
 
 def show_menu(screen):
