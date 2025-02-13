@@ -46,8 +46,11 @@ try:
             game_state = "game_over"
     
         elif game_state == "game_over":
-            show_game_over(screen, score, max_combo, miss_hit)
-            game_state = "menu"  
+            selected = show_game_over(screen, score, max_combo, miss_hit)
+            if selected == "menu":
+                game_state = "menu"
+            elif selected == "playing":
+                game_state = "playing"
 
     pygame.quit()
     # sys.exit()
