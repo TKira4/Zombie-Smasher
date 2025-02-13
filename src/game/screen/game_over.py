@@ -13,7 +13,7 @@ def show_game_over(screen, score, max_combo, miss_hit):
     draw_text(screen, f"Miss_hit: {miss_hit}", 550, 50, 36, YELLOW)
     
     replay_button = draw_button(screen, "Replay", 150, 450, 150, 50, WHITE, LIGHT_GRAY, BLACK)
-    menu_button = draw_button(screen, "Home", 350, 450, 150, 50, WHITE, LIGHT_GRAY, BLACK)
+    menu_button = draw_button(screen, "Home", 450, 450, 150, 50, WHITE, LIGHT_GRAY, BLACK)
     pygame.display.flip()
 
     for event in pygame.event.get():
